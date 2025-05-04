@@ -8,7 +8,7 @@ getgenv().serverCheck = 0 --which server to connect to (not tested)
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/LabyCatUser/rawr/refs/heads/main/evade.lua'))()
 ```
-no render:
+no render (open source) :
 ```
 https://raw.githubusercontent.com/LabyCatUser/rawr/refs/heads/main/no%20render.lua
 ```
