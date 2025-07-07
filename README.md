@@ -3,8 +3,8 @@ evade:
 getgenv().farmTickets = false
 getgenv().farmRevives = false
 getgenv().noRender = false
-getgenv().serverCheck = 0 --which server to connect to (not tested)
--- 0: default, 1: Pro, 2: Big Team
+getgenv().qx7m4z = true  --printing
+getgenv().TrackMePlease = true -optional tracking (i promise it doesnt track if set to false)
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/LabyCatUser/rawr/refs/heads/main/evade.lua'))()
 ```
