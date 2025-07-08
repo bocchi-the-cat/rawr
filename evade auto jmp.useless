@@ -1,0 +1,73 @@
+-- settings
+getgenv().JumpCooldown     = 0.1
+getgenv().RequiredState    = Enum.HumanoidStateType.Running -- ignore
+getgenv().PrintToConsole   = false
+
+local Players          = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local RunService       = game:GetService("RunService")
+local player           = Players.LocalPlayer
+
+local function log(...)
+    if getgenv().PrintToConsole then
+        print("jmp script " .. table.concat({...}, " "))
+    end
+end
+
+local function setupCharacterLogic(character)
+    local humanoid = character:WaitForChild("Humanoid")
+    if not humanoid then return end
+
+    local connections   = {}
+    local isJumpHeld    = false
+    local isJumping     = false
+    local jumpStartTime = 0
+
+    local function canJump()
+        return humanoid:GetState() == getgenv().RequiredState
+    end
+
+    local function performJump()
+        if not isJumping and canJump() then
+            isJumping     = true
+            jumpStartTime = tick()
+            humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+            log("JUMP JUMP JUMP", getgenv().JumpCooldown)
+        end
+    end
+
+    connections.JumpRequest = UserInputService.JumpRequest:Connect(function()
+        isJumpHeld = true
+        performJump()
+    end)
+
+    connections.Heartbeat = RunService.Heartbeat:Connect(function()
+        local cd = getgenv().JumpCooldown
+        if isJumping and (tick() - jumpStartTime >= cd) then
+            isJumping  = false
+            isJumpHeld = false   
+            log("cooldown over")
+        end
+        if isJumpHeld then
+            performJump()
+        end
+    end)
+
+    connections.CharacterRemoving = character.Destroying:Connect(function()
+        log("trying if no humanoid in menu")
+        for _, conn in pairs(connections) do
+            conn:Disconnect()
+        end
+    end)
+
+    log("Jump logic initialized for new character.")
+end
+
+player.CharacterAdded:Connect(setupCharacterLogic)
+if player.Character then
+    setupCharacterLogic(player.Character)
+end
+
+log("works a bit!")
+log("current settings frim: getgenv(): JumpCooldown=", getgenv().JumpCooldown,
+    " requiredstate=", getgenv().RequiredState.Name)
