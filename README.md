@@ -15,5 +15,5 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/LabyCatUser/rawr/refs
 no render (open source) :
 ```
 loadstring(game:HttpGet('https://raw.githubusercontent.com/LabyCatUser/rawr/refs/heads/main/no%20render.lua'))()
--- to execute it again :) 
+-- to disable execute it again :) 
 ```
