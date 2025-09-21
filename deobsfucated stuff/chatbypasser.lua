@@ -10,7 +10,7 @@ end
 
 _G.CrisisLoaded = true
 
--- removed set clipboard bc fuck you
+-- removed set clipboard on load bc fuck you
 
 game:GetService("StarterGui"):SetCore("SendNotification", {
 	Title = "Discord Invite",
