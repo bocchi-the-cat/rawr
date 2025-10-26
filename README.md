@@ -3,7 +3,7 @@ evade:
 getgenv().farmTickets = false
 getgenv().farmRevives = false
 getgenv().noRender = false
-getgenv().TrackMePlease = true -optional tracking (i promise it doesnt track if set to false)
+getgenv().TrackMePlease = true -- optional tracking (i promise it doesnt track if set to false)
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/bocchi-the-cat/rawr/refs/heads/main/evade.lua'))()
 ```
